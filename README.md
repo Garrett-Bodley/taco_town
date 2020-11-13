@@ -9,7 +9,7 @@ Taco Town loads a database of various taco ingredients allowing you to browse in
 
 ## Getting Started
 
-This program requires ruby to run
+This program requires ruby to run.
 
 Run bundle in your terminal to install all the required gems.
 
