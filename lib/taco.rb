@@ -1,7 +1,6 @@
 class Taco
 
     attr_accessor :ingredients
-
     @@all = []
 
     def initialize
@@ -13,9 +12,9 @@ class Taco
     end
 
     def recipe
-        recipe = {}
-        @ingredients.each {|ingredient| recipe[ingredient.type] = ingredient.name}
-        recipe
+        Hash.new.tap do |recipe|
+            @ingredients.each {|ingredient| recipe[ingredient.type] = ingredient.name}
+        end
     end
 
     def has_type?(type)
@@ -35,14 +34,12 @@ class Taco
     end
 
     def self.random
-        taco = Taco.new
-        api = Api.new
-        api.get_random.each do |type, info|
-            info.each do |title, data|
-                taco.add_ingredient(Ingredient.find_by_type(type).find {|ingredient| ingredient.send("#{title}") == data})
+        Taco.new.tap do |taco|
+            Api.new.get_random.each do |type, info|
+                info.each do |title, data|
+                    taco.add_ingredient(Ingredient.find_by_type(type).find {|ingredient| ingredient.send("#{title}") == data})
+                end
             end
         end
-        taco
     end
-
 end

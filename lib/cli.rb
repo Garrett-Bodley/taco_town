@@ -34,6 +34,7 @@ class Cli
         until input && input < 5 && input > 0
             invalid_input
             clear
+            welcome_banner
             puts prompt
             input = get_int
         end
@@ -154,7 +155,7 @@ class Cli
     end
 
     def taco_save_input
-        input = gets.chomp
+        input = gets.chomp.downcase
         until input.size == 1 && (input == "y" || input == "n")
             invalid_input
             taco_save_prompt
@@ -164,13 +165,13 @@ class Cli
     end
 
     def saved_tacos
+        clear
         if Taco.all.count == 0
             puts "You have no saved tacos."
             sleep 2
             welcome
         else
             Taco.all.each_with_index do |taco, index|
-                saved_tacos_prompt(index)
                 if  !saved_tacos_input(index)
                     break
                 end
@@ -184,6 +185,24 @@ class Cli
         puts "Showing taco #{counter+1} out of #{Taco.all.count}".bold
         Taco.all[counter].recipe.each{|type, name| puts "#{type.split("_").map{|word| word.capitalize}.join(" ")}: ".bold + "#{name.capitalize}"}
         puts "\n\nn for next taco, i for ingredient recipes, m for main menu"
+    end
+
+    def saved_tacos_input(counter)
+        saved_tacos_prompt(counter)
+        input = gets.chomp.downcase
+        until input == "n" || input == "m" || input == "i"
+            invalid_input
+            clear
+            saved_tacos_prompt(counter)
+            input = gets.chomp.downcase
+        end
+        if input == "i"
+            saved_taco_ingredients(counter)
+        elsif input == "m" || (input == "n" && counter + 1 == Taco.all.count)
+            return false
+        elsif input == "n"
+            return true
+        end
     end
 
     def saved_taco_ingredients(index)
@@ -210,27 +229,12 @@ class Cli
             invalid_input
             clear
             saved_taco_ingredients_prompt(ingredient, recipe)
+            input = gets.chomp.downcase
         end
         if input == "n"
             return true
         elsif input == "m"
             return false
-        end
-    end
-
-    def saved_tacos_input(counter)
-        input = gets.chomp.downcase
-        until input == "n" || input == "m" || input == "i"
-            invalid_input
-            saved_tacos_prompt(counter)
-            input = gets.chomp
-        end
-        if input == "i"
-            saved_taco_ingredients(counter)
-        elsif input == "m" || (input == "n" && counter + 1 == Taco.all.count)
-            return false
-        elsif input == "n"
-            return true
         end
     end
 
