@@ -45,7 +45,6 @@ class Cli
         if input == Ingredient.types.count + 1
             welcome
         else
-            binding.pry
             choose_ingredient(Ingredient.types[input-1])
         end
     end
@@ -80,7 +79,6 @@ class Cli
     end
 
     def choose_ingredient(type)
-        binding.pry
         matching = Ingredient.find_by_type(type)
         input = choose_ingredient_input(matching)
         display_ingredient(matching[input-1])
