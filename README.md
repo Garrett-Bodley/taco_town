@@ -17,7 +17,7 @@ Run bundle in your terminal to install all the required gems.
 bundle install
 ```
 
-From there, you can give the bin file permissions to be executable.
+From there, give the ./bin file permission to be executable using the following code.
 
 ```zsh
 chmod +x ./bin/run

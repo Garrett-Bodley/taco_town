@@ -19,10 +19,4 @@ class Api
         JSON.parse(get_request)
     end
 
-    # def get_ingredient(slug:, layer_type:)
-    #     url = "#{MASTER}" + "#{layer_type}s/#{slug}.md"
-    #     uri = URI.parse(url)
-    #     response = Net::HTTP.get(uri)
-    # end
-
 end
