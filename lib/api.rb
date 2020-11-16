@@ -1,9 +1,5 @@
 class Api
-
     ENDPOINT = "http://taco-randomizer.herokuapp.com/"
-    MASTER = "https://raw.github.com/sinker/tacofancy/master/"
-
-    # gets a random taco and returns a list of ingredients
     
     def get_request(query="random")
         url = "#{ENDPOINT}" + "#{query}/"
@@ -18,5 +14,4 @@ class Api
     def get_random
         JSON.parse(get_request)
     end
-
 end

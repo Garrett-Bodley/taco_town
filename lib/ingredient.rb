@@ -13,9 +13,10 @@ class Ingredient
     end
 
     def self.load
-        api = Api.new
-        api.get_random.each_key do |type|
-            api.search_by_type(type).each {|ingredient| Ingredient.new(type: type, ingredient: ingredient)}
+        Api.new.tap do |api|
+            api.get_random.each_key do |type|
+                api.search_by_type(type).each {|ingredient| Ingredient.new(type: type, ingredient: ingredient)}
+            end
         end
     end
 
