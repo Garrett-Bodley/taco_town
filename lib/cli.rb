@@ -250,10 +250,6 @@ class Cli
         puts "\e[2J\e[f"
     end
 
-    def clear
-        puts "\e[2J\e[f"
-    end
-
     def invalid_input
         puts
         puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
